@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ხის სახლები — ბავშვის ოცნება</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:  #2D4A2D;
+    --moss:    #4A7C59;
+    --bark:    #8B6340;
+    --honey:   #D4A853;
+    --cream:   #F5EDD8;
+    --white:   #FDFAF4;
+    --dark:    #1A2E1A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 56px;
+    background: rgba(253,250,244,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,74,45,0.1);
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 900; color: var(--forest); text-decoration: none; }
+  .logo span { color: var(--honey); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul a { text-decoration: none; color: var(--forest); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  nav ul a:hover { color: var(--honey); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #2D4A2D 0%, #4A7C59 55%, #6B9E78 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 120px 56px 80px;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M40 0 L50 30 L80 30 L57 48 L65 78 L40 60 L15 78 L23 48 L0 30 L30 30 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Trees decoration */
+  .trees-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 160px; pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(212,168,83,0.5);
+    color: var(--honey); padding: 7px 22px; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 28px; animation: fadeUp 0.7s ease both; position: relative; z-index: 2;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; line-height: 1.1;
+    color: var(--cream); margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.12s ease both; position: relative; z-index: 2;
+  }
+  .hero h1 em { color: var(--honey); font-style: normal; }
+  .hero p {
+    color: rgba(245,237,216,0.8); font-size: 1.1rem; line-height: 1.75;
+    max-width: 560px; margin: 0 auto 56px;
+    animation: fadeUp 0.7s 0.24s ease both; position: relative; z-index: 2;
+  }
+
+  /* CHOICE CARDS */
+  .choice-wrap {
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.7s 0.36s ease both; position: relative; z-index: 2;
+  }
+
+  .choice-card {
+    width: 280px; border-radius: 28px; overflow: hidden;
+    text-decoration: none; position: relative;
+    transition: transform 0.35s, box-shadow 0.35s;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+  .choice-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+
+  .choice-card-inner {
+    padding: 44px 32px 36px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    min-height: 320px; justify-content: space-between;
+  }
+
+  .choice-card.girls .choice-card-inner {
+    background: linear-gradient(160deg, #F8D7E8, #E8C8F8, #D4B8F0);
+  }
+  .choice-card.boys .choice-card-inner {
+    background: linear-gradient(160deg, #C8E4F8, #B8D4F0, #A8C8E8);
+  }
+
+  .choice-icon { font-size: 5rem; margin-bottom: 16px; display: block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15)); }
+
+  .choice-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem; font-weight: 900; margin-bottom: 12px;
+  }
+  .choice-card.girls h2 { color: #7A4FB5; }
+  .choice-card.boys h2 { color: #1A4A8A; }
+
+  .choice-card p { font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px; }
+  .choice-card.girls p { color: #5A4060; }
+  .choice-card.boys p { color: #2A3A5A; }
+
+  .choice-btn {
+    padding: 12px 28px; border-radius: 50px;
+    font-weight: 800; font-size: 0.9rem;
+    border: none; cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .choice-btn:hover { transform: scale(1.05); opacity: 0.9; }
+  .choice-card.girls .choice-btn { background: linear-gradient(135deg, #7A4FB5, #E07AA0); color: white; }
+  .choice-card.boys .choice-btn { background: linear-gradient(135deg, #1A4A8A, #2E86C1); color: white; }
+
+  /* Decorative corners */
+  .choice-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .choice-card.girls::before { background: linear-gradient(90deg, #E07AA0, #9B72CF); }
+  .choice-card.boys::before { background: linear-gradient(90deg, #2E86C1, #1A4A8A); }
+
+  /* STATS */
+  .stats {
+    background: var(--forest); padding: 48px 56px;
+    display: flex; justify-content: center; gap: 72px; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--honey); display: block; }
+  .stat-label { font-size: 0.82rem; color: rgba(245,237,216,0.65); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; display: block; }
+
+  /* FEATURES */
+  .features { background: var(--cream); padding: 80px 56px; }
+  .features h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 900; color: var(--forest); text-align: center; margin-bottom: 48px; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .feat { background: var(--white); border-radius: 18px; padding: 32px 24px; text-align: center; box-shadow: 0 2px 16px rgba(45,74,45,0.07); transition: transform 0.3s; border: 1px solid rgba(45,74,45,0.08); }
+  .feat:hover { transform: translateY(-5px); }
+  .feat-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
+  .feat h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+  .feat p { color: #777; font-size: 0.87rem; line-height: 1.65; }
+
+  /* CONTACT */
+  #contact { background: linear-gradient(135deg, var(--forest), var(--moss)); padding: 80px 56px; }
+  .contact-wrap { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .contact-info h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+  .contact-info p { color: rgba(245,237,216,0.75); line-height: 1.7; margin-bottom: 32px; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; color: var(--cream); margin-bottom: 14px; font-size: 0.95rem; }
+  .contact-form { background: rgba(253,250,244,0.08); border: 1px solid rgba(245,237,216,0.15); border-radius: 20px; padding: 32px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; color: rgba(245,237,216,0.7); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 7px; }
+  .form-group input, .form-group textarea { width: 100%; background: rgba(253,250,244,0.1); border: 1px solid rgba(245,237,216,0.2); border-radius: 10px; padding: 12px 15px; color: var(--cream); font-family: 'Nunito', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,237,216,0.35); }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--honey); background: rgba(253,250,244,0.15); }
+  .form-group textarea { height: 100px; resize: vertical; }
+  .btn-submit { width: 100%; background: var(--honey); color: var(--dark); padding: 14px; border-radius: 50px; font-weight: 800; font-size: 0.98rem; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; font-family: 'Nunito', sans-serif; }
+  .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  footer { background: var(--dark); padding: 26px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  footer .logo { font-size: 1.2rem; }
+  footer p { color: rgba(245,237,216,0.35); font-size: 0.83rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 22px; }
+    nav ul { display: none; }
+    .hero { padding: 100px 22px 60px; }
+    .choice-wrap { flex-direction: column; align-items: center; }
+    .choice-card { width: 100%; max-width: 340px; }
+    .stats { padding: 36px 22px; gap: 36px; }
+    .features { padding: 60px 22px; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+    #contact { padding: 60px 22px; }
+    footer { padding: 22px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">🌳 ხის<span>სახლი</span></a>
+  <ul>
+    <li><a href="girls.html">🩷 გოგოების</a></li>
+    <li><a href="boys.html">💙 ბიჭების</a></li>
+    <li><a href="#contact">კონტაქტი</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="trees-bottom">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,160 L0,90 L60,50 L120,80 L180,30 L240,65 L300,20 L360,70 L420,15 L480,55 L540,5 L600,45 L660,25 L720,65 L780,15 L840,55 L900,35 L960,75 L1020,25 L1080,65 L1140,45 L1200,85 L1260,55 L1320,75 L1380,45 L1440,65 L1440,160 Z" fill="rgba(0,0,0,0.18)"/>
+      <path d="M0,160 L0,120 L80,85 L160,115 L240,75 L320,105 L400,65 L480,95 L560,55 L640,85 L720,45 L800,75 L880,105 L960,65 L1040,95 L1120,75 L1200,105 L1280,85 L1360,115 L1440,95 L1440,160 Z" fill="rgba(0,0,0,0.12)"/>
+    </svg>
+  </div>
+
+  <div class="hero-badge">🌿 ხელნაკეთი · ეკო-მასალა · ქართული წარმოება</div>
+  <h1>ბავშვის <em>ოცნება</em><br>ხეში იბადება</h1>
+  <p>ვქმნით უნიკალურ ხის სახლებს — აირჩიე შენი ბავშვის სტილი და ჩვენ ავაშენებთ ოცნებას!</p>
+
+  <div class="choice-wrap">
+    <a href="girls.html" class="choice-card girls">
+      <div class="choice-card-inner">
+        <span class="choice-icon">🌸</span>
+        <div>
+          <h2>გოგოების სახლები</h2>
+          <p>ვარდისფერი, იასამნისფერი, გულები და ვარსკვლავები — სამეფო ოცნება ყოველი გოგოსთვის!</p>
+        </div>
+        <button class="choice-btn">ნახვა →</button>
+      </div>
+    </a>
+
+    <a href="boys.html" class="choice-card boys">
+      <div class="choice-card-inner">
+        <span class="choice-icon">⚡</span>
+        <div>
+          <h2>ბიჭების სახლები</h2>
+          <p>მამაცური, მაგარი, ციხე-სიმაგრე ან კოსმოსური ბაზა — ყოველი გმირის ოცნება!</p>
+        </div>
+        <button class="choice-btn">ნახვა →</button>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item"><span class="stat-num">120+</span><span class="stat-label">ბედნიერი ოჯახი</span></div>
+  <div class="stat-item"><span class="stat-num">8+</span><span class="stat-label">წლიანი გამოცდილება</span></div>
+  <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">ბუნებრივი მასალა</span></div>
+  <div class="stat-item"><span class="stat-num">1 წელი</span><span class="stat-label">გარანტია</span></div>
+</div>
+
+<section class="features">
+  <h2>რატომ ჩვენ? 🌳</h2>
+  <div class="features-grid">
+    <div class="feat"><span class="feat-icon">🌳</span><h4>ბუნებრივი ხე</h4><p>100% ადგილობრივი, ეკო-სერტიფიცირებული ხე — ნაძვი, წიფელი, მუხა.</p></div>
+    <div class="feat"><span class="feat-icon">🔒</span><h4>უსაფრთხოება</h4><p>დაბოლოებული კუთხეები, გამაგრებული სახსრები — ბავშვის უსაფრთხოება პრიორიტეტია.</p></div>
+    <div class="feat"><span class="feat-icon">🎨</span><h4>ნებისმიერი ფერი</h4><p>შენ ირჩევ ფერს, დეკორს, ზომას — ჩვენ ვქმნით ოცნებას.</p></div>
+    <div class="feat"><span class="feat-icon">🚚</span><h4>მიწოდება + მონტაჟი</h4><p>მივიტანთ, ავაშენებთ, ჩავაბარებთ — შენ მხოლოდ ბავშვის სახე ნახავ!</p></div>
+    <div class="feat"><span class="feat-icon">🔧</span><h4>1 წლიანი გარანტია</h4><p>სერვისი და გარანტია — ყოველი გაყიდული სახლის სტანდარტია.</p></div>
+    <div class="feat"><span class="feat-icon">💳</span><h4>განვადება</h4><p>6–24 თვიანი განვადება ბანკის პროცენტის გარეშე.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h2>დაგვიკავშირდი! 🌿</h2>
+      <p>მოგვიყევი შენი ეზოს და ბავშვის შესახებ — ჩვენ სწორ სახლს შევარჩევთ.</p>
+      <div class="contact-detail"><span>📍</span><span>თბილისი, საქართველო</span></div>
+      <div class="contact-detail"><span>📞</span><span>+995 555 123 456</span></div>
+      <div class="contact-detail"><span>📧</span><span>info@xissaxli.ge</span></div>
+      <div class="contact-detail"><span>💬</span><span>WhatsApp / Viber</span></div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label>სახელი</label><input type="text" placeholder="გიორგი მაისურაძე"></div>
+      <div class="form-group"><label>ტელეფონი</label><input type="tel" placeholder="+995 5XX XXX XXX"></div>
+      <div class="form-group"><label>შეტყობინება</label><textarea placeholder="ბავშვის ასაკი, ეზოს ზომა..."></textarea></div>
+      <button class="btn-submit" onclick="this.textContent='✅ გაიგზავნა! მალე დაგიკავშირდებით'; this.disabled=true;">გამოგვიგზავნე შეტყობინება 🌿</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="logo">🌳 ხის<span>სახლი</span></a>
+  <p>© 2025 ხისსახლი.გე · ყველა უფლება დაცულია</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  }), { threshold: 0.1 });
+  document.querySelectorAll('.feat').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(22px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
