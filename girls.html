@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>გოგოების ხის სახლები 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F2A7C3; --pink-deep: #E07AA0;
+    --purple: #9B72CF; --purple-deep: #7A4FB5;
+    --cream: #FFF5F9; --dark: #2D1B3D; --text: #5A4060;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 56px;
+    background: rgba(255,245,249,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(155,114,207,0.15);
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--purple-deep); text-decoration: none; }
+  .logo span { color: var(--pink-deep); }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--text); font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--purple-deep); }
+  .nav-back { background: linear-gradient(135deg, var(--purple-deep), var(--pink-deep)); color: white !important; padding: 8px 20px; border-radius: 50px; font-size: 0.82rem !important; }
+
+  .hero {
+    min-height: 50vh;
+    background: linear-gradient(135deg, #F8D7E8, #E8C8F8, #D4B8F0);
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 56px 72px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.6); border: 1.5px solid var(--pink); color: var(--purple-deep); padding: 7px 22px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; animation: fadeUp 0.7s ease both; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; color: var(--dark); margin-bottom: 16px; animation: fadeUp 0.7s 0.1s ease both; }
+  .hero h1 em { color: var(--purple-deep); font-style: normal; }
+  .hero p { color: var(--text); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin: 0 auto; animation: fadeUp 0.7s 0.2s ease both; }
+
+  .section-header { text-align: center; padding: 72px 56px 48px; }
+  .section-tag { display: inline-block; color: var(--purple-deep); font-weight: 800; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; color: var(--dark); }
+
+  .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; padding: 0 56px 80px; max-width: 1280px; margin: 0 auto; }
+  .card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 20px rgba(122,79,181,0.09); border: 1.5px solid rgba(155,114,207,0.12); transition: transform 0.3s, box-shadow 0.3s; }
+  .card:hover { transform: translateY(-7px); box-shadow: 0 20px 48px rgba(122,79,181,0.18); }
+  .card-img { height: 250px; position: relative; overflow: hidden; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .card:hover .card-img img { transform: scale(1.05); }
+  .card-img svg { width: 100%; height: 100%; }
+  .card-badge { position: absolute; top: 14px; left: 14px; padding: 5px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; }
+  .badge-new { background: var(--purple-deep); color: white; }
+  .badge-pop { background: var(--pink-deep); color: white; }
+  .badge-best { background: #C49A5A; color: white; }
+  .card-body { padding: 26px; }
+  .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .card-body p { color: var(--text); font-size: 0.9rem; line-height: 1.65; margin-bottom: 18px; }
+  .card-specs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .spec { background: var(--cream); border: 1px solid rgba(155,114,207,0.2); border-radius: 50px; padding: 4px 12px; font-size: 0.77rem; font-weight: 700; color: var(--purple-deep); }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid rgba(155,114,207,0.1); }
+  .price { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--purple-deep); }
+  .price span { font-size: 0.8rem; color: #aaa; font-family: 'Nunito', sans-serif; font-weight: 400; }
+  .btn-card { background: linear-gradient(135deg, var(--purple-deep), var(--pink-deep)); color: white; padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; font-family: 'Nunito', sans-serif; }
+  .btn-card:hover { opacity: 0.88; transform: scale(1.03); }
+
+  #contact { background: linear-gradient(135deg, var(--purple-deep), var(--pink-deep)); padding: 80px 56px; }
+  .contact-wrap { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .contact-info h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; color: white; margin-bottom: 16px; }
+  .contact-info p { color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; color: white; margin-bottom: 14px; }
+  .contact-form { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 32px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 7px; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); border-radius: 10px; padding: 12px 15px; color: white; font-family: 'Nunito', sans-serif; font-size: 0.92rem; outline: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
+  .form-group input:focus, .form-group textarea:focus { border-color: rgba(255,255,255,0.6); }
+  .form-group select option { background: var(--purple-deep); }
+  .form-group textarea { height: 100px; resize: vertical; }
+  .btn-submit { width: 100%; background: white; color: var(--purple-deep); padding: 14px; border-radius: 50px; font-weight: 800; font-size: 0.98rem; border: none; cursor: pointer; font-family: 'Nunito', sans-serif; transition: opacity 0.2s; }
+  .btn-submit:hover { opacity: 0.92; }
+
+  footer { background: var(--dark); padding: 26px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  footer p { color: rgba(255,255,255,0.35); font-size: 0.83rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 22px; }
+    .hero { padding: 100px 22px 56px; }
+    .section-header { padding: 56px 22px 36px; }
+    .catalog-grid { padding: 0 22px 60px; grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+    #contact { padding: 60px 22px; }
+    footer { padding: 22px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">🌳 ხის<span>სახლი</span></a>
+  <div class="nav-links">
+    <a href="boys.html">💙 ბიჭების</a>
+    <a href="#contact">შეკვეთა</a>
+    <a href="index.html" class="nav-back">← მთავარი</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌸 გოგოების კოლექცია</div>
+    <h1>სამეფო <em>ოცნება</em><br>ყოველი გოგოსთვის</h1>
+    <p>ვარდისფერი, იასამნისფერი, გულები და ვარსკვლავები — ვქმნით სახლებს, სადაც ოცნება ცხოვრობს.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <span class="section-tag">🌸 გოგოების კატალოგი</span>
+    <h2>აირჩიე შენი ოცნება</h2>
+  </div>
+  <div class="catalog-grid">
+
+    <div class="card">
+      <div class="card-img">
+        <img src="house1.jfif" alt="ვარდის ბუდე">
+        <span class="card-badge badge-new">ახალი</span>
+      </div>
+      <div class="card-body">
+        <h3>💜 "ვარდის ბუდე" — მინი</h3>
+        <p>2 მ² კომპაქტური სახლი გულის დეკორით და ლამაზი ვერანდით. პატარა ეზოსთვის იდეალური!</p>
+        <div class="card-specs">
+          <span class="spec">📐 2 მ²</span><span class="spec">190×140 სმ</span><span class="spec">↕ 220 სმ</span><span class="spec">👶 3–8 წ.</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">₾ 2,800 <span>/ განვ.</span></div>
+          <button class="btn-card" onclick="scrollContact()">შეკვეთა 💜</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+          <rect width="330" height="250" fill="#F0D4F8"/>
+          <rect x="75" y="110" width="180" height="125" fill="#F2C0D8" rx="4"/>
+          <polygon points="165,35 50,120 280,120" fill="#9B72CF"/>
+          <polygon points="165,35 85,112 245,112" fill="#B090E8"/>
+          <rect x="138" y="155" width="54" height="80" fill="#B060A0" rx="3"/>
+          <path d="M163 188 a7 7 0 0 1 14 0 a7 7 0 0 1 -14 0" fill="#9B72CF"/>
+          <rect x="88" y="128" width="46" height="46" fill="#E8C8F8" rx="4"/>
+          <rect x="196" y="128" width="46" height="46" fill="#E8C8F8" rx="4"/>
+          <text x="111" y="158" text-anchor="middle" font-size="22" fill="#9B72CF">♥</text>
+          <text x="219" y="158" text-anchor="middle" font-size="22" fill="#9B72CF">★</text>
+          <rect x="55" y="233" width="220" height="10" fill="#C49A5A" rx="3"/>
+          <rect x="40" y="168" width="14" height="72" fill="#D4AA6A"/>
+          <rect x="276" y="168" width="14" height="72" fill="#D4AA6A"/>
+        </svg>
+        <span class="card-badge badge-pop">პოპულარული</span>
+      </div>
+      <div class="card-body">
+        <h3>🌸 "ვარდის სასახლე" — სტანდარტი</h3>
+        <p>3 მ² სახლი ვრცელი ვერანდით, ორი ფანჯრით, გულისა და ვარსკვლავის დეკორით.</p>
+        <div class="card-specs">
+          <span class="spec">📐 3 მ²</span><span class="spec">200×150 სმ</span><span class="spec">↕ 230 სმ</span><span class="spec">👶 4–12 წ.</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">₾ 3,900 <span>/ განვ.</span></div>
+          <button class="btn-card" onclick="scrollContact()">შეკვეთა 💜</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+          <rect width="330" height="250" fill="#FCE8F4"/>
+          <rect x="55" y="105" width="220" height="130" fill="#F4B8D4" rx="4"/>
+          <polygon points="165,25 30,115 300,115" fill="#E07AA0"/>
+          <polygon points="165,25 55,107 275,107" fill="#F090B8"/>
+          <rect x="132" y="148" width="66" height="87" fill="#C04878" rx="3"/>
+          <path d="M160 180 a9 9 0 0 1 18 0 a9 9 0 0 1 -18 0" fill="#E07AA0"/>
+          <rect x="68" y="122" width="50" height="50" fill="#FCD8EC" rx="5"/>
+          <rect x="212" y="122" width="50" height="50" fill="#FCD8EC" rx="5"/>
+          <text x="93" y="152" text-anchor="middle" font-size="22" fill="#E07AA0">♥</text>
+          <text x="237" y="152" text-anchor="middle" font-size="22" fill="#E07AA0">♥</text>
+          <rect x="35" y="233" width="260" height="10" fill="#C49A5A" rx="3"/>
+          <rect x="20" y="160" width="14" height="78" fill="#D4AA6A"/>
+          <rect x="296" y="160" width="14" height="78" fill="#D4AA6A"/>
+          <text x="165" y="88" text-anchor="middle" font-size="32" fill="white" opacity="0.7">♥</text>
+        </svg>
+        <span class="card-badge badge-best">პრემიუმ</span>
+      </div>
+      <div class="card-body">
+        <h3>✨ "ოცნების სასახლე" — ინდ.</h3>
+        <p>სრულად ინდივიდუალური — შენ ირჩევ ფერს, დეკორს, ზომას. ბავშვის ოცნება ჩვენი ამოცანაა!</p>
+        <div class="card-specs">
+          <span class="spec">📐 2–5 მ²</span><span class="spec">ინდ. ზომა</span><span class="spec">ნებ. ფერი</span><span class="spec">👶 3–14 წ.</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">₾ შეთ.</div>
+          <button class="btn-card" onclick="scrollContact()">კონსულტაცია</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h2>შეუკვეთე გოგოს ოცნება! 🌸</h2>
+      <p>მოგვიყევი ბავშვის ასაკის, ეზოს ზომისა და სასურველი ფერის შესახებ.</p>
+      <div class="contact-detail"><span>📞</span><span>+995 555 123 456</span></div>
+      <div class="contact-detail"><span>💬</span><span>WhatsApp / Viber</span></div>
+      <div class="contact-detail"><span>🕐</span><span>ყოველდღე: 10:00 – 20:00</span></div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label>სახელი</label><input type="text" placeholder="მარიამ გიორგაძე"></div>
+      <div class="form-group"><label>ტელეფონი</label><input type="tel" placeholder="+995 5XX XXX XXX"></div>
+      <div class="form-group">
+        <label>მოდელი</label>
+        <select>
+          <option>— აირჩიე —</option>
+          <option>🌸 ვარდის ბუდე — 2 მ² (₾2,800)</option>
+          <option>💜 ვარდის სასახლე — 3 მ² (₾3,900)</option>
+          <option>✨ ოცნების სასახლე — ინდ.</option>
+        </select>
+      </div>
+      <div class="form-group"><label>შეტყობინება</label><textarea placeholder="ბავშვის ასაკი, ეზოს ზომა, სასურველი ფერი..."></textarea></div>
+      <button class="btn-submit" onclick="this.textContent='✅ გაიგზავნა! მალე დაგიკავშირდებით 💜'; this.disabled=true;">გამოგვიგზავნე შეტყობინება 💜</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="logo">🌳 ხის<span style="color:#E07AA0">სახლი</span></a>
+  <p>© 2025 ხისსახლი.გე · ყველა უფლება დაცულია 🌸</p>
+</footer>
+
+<script>
+  function scrollContact() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }), { threshold: 0.1 });
+  document.querySelectorAll('.card').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(22px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el); });
+</script>
+</body>
+</html>
